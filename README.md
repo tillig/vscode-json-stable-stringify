@@ -6,7 +6,9 @@ While it will use the editor's current settings for indentation, it otherwise us
 
 ## Features
 
-This extension implements the document formatter for JSON so you can use the command palette (`Ctrl+Shift+P`) and execute `Format Document` to format the whole document. You may also select a subset of a document that is valid JSON (e.g., something inside an HTML doc or a JavaScript doc) and use the `Sort JSON (Stable)` command to format just the selected content.
+This extension implements only a command accessible via the command palette (`Ctrl+Shift+P`) called `Sort JSON (Stable)`. If you have one or more selections in the editor, the selections will be parsed as JSON, sorted, and formatted. If you have no selection, the whole document will be sorted and formatted.
+
+In an effort to avoid conflicting with other JSON beautifier plugins, sorting will not occur on `Format Document`. You must elect to run the stable sort command directly.
 
 ## Release Notes
 

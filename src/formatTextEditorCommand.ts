@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { StringifyResult } from './stringifyResult';
-const stringify = require('json-stable-stringify');
+import * as stringify from 'json-stable-stringify';
 
 export function formatTextEditorCommand(textEditor: vscode.TextEditor, edit: vscode.TextEditorEdit){
   let error: boolean = false;
@@ -54,7 +54,7 @@ export function formatTextEditorCommand(textEditor: vscode.TextEditor, edit: vsc
 }
 
 function sortJson(original: string, editorOptions: vscode.TextEditorOptions, start: vscode.Position) : StringifyResult {
-  var opts = {
+  let opts: stringify.Options = {
     "space": editorOptions.insertSpaces ? editorOptions.tabSize : '\t'
   };
 

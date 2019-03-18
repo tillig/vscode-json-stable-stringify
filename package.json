@@ -11,7 +11,9 @@
     "Formatters"
   ],
   "keywords": [
-    "sort", "json", "format"
+    "sort",
+    "json",
+    "format"
   ],
   "homepage": "https://github.com/tillig/vscode-json-stable-stringify",
   "qna": "https://github.com/tillig/vscode-json-stable-stringify/issues",
@@ -42,13 +44,18 @@
     "test": "npm run compile && node ./node_modules/vscode/bin/test"
   },
   "devDependencies": {
-    "typescript": "^3.3.1",
-    "vscode": "^1.1.28",
-    "tslint": "^5.12.1",
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^2.2.42",
     "@types/node": "^10.12.21",
-    "@types/mocha": "^2.2.42"
+    "@types/sinon": "^7.0.10",
+    "chai": "^4.2.0",
+    "sinon": "^7.2.7",
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.1",
+    "vscode": "^1.1.28"
   },
   "dependencies": {
+    "@types/json-stable-stringify": "^1.0.32",
     "json-stable-stringify": "^1.0.1"
   }
 }

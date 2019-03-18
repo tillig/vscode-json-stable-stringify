@@ -1,22 +1,49 @@
-//
-// Note: This example test is leveraging the Mocha test framework.
-// Please refer to their documentation on https://mochajs.org/ for help.
-//
+import * as vscode from 'vscode';
+import * as sinon from 'sinon';
+import { assert } from 'chai';
+import * as entry from '../src/extension';
 
-// The module 'assert' provides assertion methods from node
-import * as assert from 'assert';
+describe("Entry point", function () {
+  context('ensures that', function(){
+    let sandbox: sinon.SinonSandbox;
+    let extensionContext: vscode.ExtensionContext = <vscode.ExtensionContext>{ };
+    let subscriptions: { dispose(): any }[] = [];
 
-// You can import and use all API from the 'vscode' module
-// as well as import your extension to test it
-// import * as vscode from 'vscode';
-// import * as myExtension from '../extension';
+    beforeEach(function () {
+      sandbox = sinon.createSandbox();
+      subscriptions.length = 0;
+      extensionContext.subscriptions = subscriptions;
+    });
 
-// Defines a Mocha test suite to group tests of similar kind together
-suite("Extension Tests", function () {
+    afterEach(function () {
+      sandbox.restore();
+    });
 
-  // Defines a Mocha unit test
-  test("Something 1", function() {
-    assert.equal(-1, [1, 2, 3].indexOf(5));
-    assert.equal(-1, [1, 2, 3].indexOf(0));
-  });
+    context('when activated', function () {
+      let infoStub: sinon.SinonStub<any, any>;
+      let registerStub: sinon.SinonStub<any, any>;
+
+      beforeEach(function () {
+        infoStub = sandbox.stub(console, 'info');
+        registerStub = sandbox.stub(vscode.commands, 'registerTextEditorCommand');
+      });
+
+      it('activates the extension', function () {
+        entry.activate(extensionContext);
+        assert.equal(1, extensionContext.subscriptions.length);
+        assert.isTrue(registerStub.calledOnceWithExactly('extension.jsonStableSort', sinon.match.any));
+      });
+
+      it('prints an activation informative message', function () {
+        entry.activate(extensionContext);
+        assert.isTrue(infoStub.calledOnceWithExactly('[vscode-json-stable-stringify] activated!'));
+      });
+    });
+
+    context('when deactivated', function () {
+      it('does nothing', function () {
+        return entry.deactivate();
+      });
+    });
+  })
 });

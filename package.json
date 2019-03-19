@@ -1,8 +1,8 @@
 {
   "name": "vscode-json-stable-stringify",
+  "version": "1.0.0",
   "displayName": "JSON Stable Sort",
   "description": "JSON object sort/document formatter using json-stable-stringify.",
-  "version": "0.0.1",
   "license": "MIT",
   "engines": {
     "vscode": "^1.32.0"
@@ -25,13 +25,13 @@
     "url": "https://github.com/tillig/vscode-json-stable-stringify/issues"
   },
   "activationEvents": [
-    "*"
+    "onCommand:extension.vscode-json-stable-stringify.jsonStableSort"
   ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "extension.jsonStableSort",
+        "command": "extension.vscode-json-stable-stringify.jsonStableSort",
         "title": "Sort JSON (Stable)"
       }
     ]

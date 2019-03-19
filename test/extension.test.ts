@@ -31,7 +31,7 @@ describe("Entry point", function () {
       it('activates the extension', function () {
         entry.activate(extensionContext);
         assert.equal(1, extensionContext.subscriptions.length);
-        assert.isTrue(registerStub.calledOnceWithExactly('extension.jsonStableSort', sinon.match.any));
+        assert.isTrue(registerStub.calledOnceWithExactly('extension.vscode-json-stable-stringify.jsonStableSort', sinon.match.any));
       });
 
       it('prints an activation informative message', function () {

@@ -4,6 +4,7 @@
   "displayName": "JSON Stable Sort",
   "description": "JSON object sort/document formatter using json-stable-stringify.",
   "license": "MIT",
+  "publisher": "TravisIllig",
   "engines": {
     "vscode": "^1.32.0"
   },

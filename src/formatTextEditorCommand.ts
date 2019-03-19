@@ -5,10 +5,11 @@ import * as stringify from 'json-stable-stringify';
 export function formatTextEditorCommand(textEditor: vscode.TextEditor, edit: vscode.TextEditorEdit){
   let error: boolean = false;
   if(textEditor.selections.length === 1 && textEditor.selections[0].isEmpty) {
-    // TODO: There's no selection - do the whole doc.
+    // There's no selection - do the whole doc.
     let text: string = textEditor.document.getText();
     if (text.length < 2) {
-      // All JSON is at least two characters, even empty string/object.
+      // All JSON is at least two characters, even empty string/object. If it's a single-digit number,
+      // there's arguably nothing to sort anyway.
       return;
     }
 
@@ -34,7 +35,8 @@ export function formatTextEditorCommand(textEditor: vscode.TextEditor, edit: vsc
 
       let text: string = textEditor.document.getText(selection);
       if(text.length < 2) {
-        // All JSON is at least two characters, even empty string/object.
+      // All JSON is at least two characters, even empty string/object. If it's a single-digit number,
+      // there's arguably nothing to sort anyway.
         continue;
       }
 
@@ -64,10 +66,10 @@ function sortJson(original: string, editorOptions: vscode.TextEditorOptions, sta
     sorted = stringify(JSON.parse(original), opts);
     success = true;
   } catch (e) {
-    console.log("Error doing stable stringify of JSON content at line {0}, char {1}:", start.line, start.character);
-    console.log(e.Message);
-    console.log("Content:");
-    console.log(original);
+    console.error("Error doing stable stringify of JSON content at line " + start.line + ", char " + start.character + ":");
+    console.error(e);
+    console.error("Content:");
+    console.error(original);
   }
 
   return new StringifyResult(success, sorted);

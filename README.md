@@ -1,6 +1,6 @@
-# VSCode - Sort JSON (Stable)
+# Sort JSON (Stable)
 
-The `vscode-json-stable-stringify` extension is used to sort a JSON object using the [`json-stable-stringify` sort mechanism](https://github.com/substack/json-stable-stringify") to create a standardized, sorted JSON object.
+The `vscode-json-stable-stringify` extension is used to sort a JSON object in VS Code using the [`json-stable-stringify` sort mechanism](https://github.com/substack/json-stable-stringify") to create a standardized, sorted JSON object.
 
 While it will use the editor's current settings for indentation, it otherwise uses default settings for the sort.
 

@@ -51,7 +51,7 @@ export function formatTextEditorCommand(textEditor: vscode.TextEditor, edit: vsc
   }
 
   if (error) {
-    vscode.window.showErrorMessage("Error during JSON sort. See console for details.");
+    vscode.window.showErrorMessage("Error during JSON sort. See JavaScript console for details (Help => Toggle Developer Tools).");
   }
 }
 

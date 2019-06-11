@@ -3,45 +3,45 @@ import * as sinon from 'sinon';
 import { assert } from 'chai';
 import * as entry from '../src/extension';
 
-describe("Entry point", function () {
-  context('ensures that', function(){
+describe('Entry point', () => {
+  context('ensures that', () => {
     let sandbox: sinon.SinonSandbox;
-    let extensionContext: vscode.ExtensionContext = <vscode.ExtensionContext>{ };
-    let subscriptions: { dispose(): any }[] = [];
+    const extensionContext = { } as any as vscode.ExtensionContext;
+    const subscriptions: Array<{ dispose(): any }> = [];
 
-    beforeEach(function () {
+    beforeEach(() => {
       sandbox = sinon.createSandbox();
       subscriptions.length = 0;
       extensionContext.subscriptions = subscriptions;
     });
 
-    afterEach(function () {
+    afterEach(() => {
       sandbox.restore();
     });
 
-    context('when activated', function () {
+    context('when activated', () => {
       let infoStub: sinon.SinonStub<any, any>;
       let registerStub: sinon.SinonStub<any, any>;
 
-      beforeEach(function () {
+      beforeEach(() => {
         infoStub = sandbox.stub(console, 'info');
         registerStub = sandbox.stub(vscode.commands, 'registerTextEditorCommand');
       });
 
-      it('activates the extension', function () {
+      it('activates the extension', () => {
         entry.activate(extensionContext);
         assert.equal(1, extensionContext.subscriptions.length);
         assert.isTrue(registerStub.calledOnceWithExactly('extension.vscode-json-stable-stringify.jsonStableSort', sinon.match.any));
       });
 
-      it('prints an activation informative message', function () {
+      it('prints an activation informative message', () => {
         entry.activate(extensionContext);
         assert.isTrue(infoStub.calledOnceWithExactly('[vscode-json-stable-stringify] activated!'));
       });
     });
 
-    context('when deactivated', function () {
-      it('does nothing', function () {
+    context('when deactivated', () => {
+      it('does nothing', () => {
         return entry.deactivate();
       });
     });

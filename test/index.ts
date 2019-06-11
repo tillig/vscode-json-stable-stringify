@@ -17,7 +17,7 @@ import * as testRunner from 'vscode/lib/testrunner';
 // for more info
 testRunner.configure({
   ui: 'bdd',
-  useColors: true
+  useColors: true,
 });
 
 module.exports = testRunner;

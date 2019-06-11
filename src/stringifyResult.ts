@@ -1,6 +1,6 @@
 export class StringifyResult {
-  success: boolean;
-  result: string;
+  public success: boolean;
+  public result: string;
 
   constructor(success: boolean, result: string) {
     this.success = success;

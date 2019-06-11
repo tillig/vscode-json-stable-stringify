@@ -21,3 +21,7 @@ Finally, some JSON sorters are hard-tied to the JSON document type. This ignores
 ### 1.0.0
 
 Initial release.
+
+### 1.1.0
+
+Errors during sort will get written to the "Tasks" output window.

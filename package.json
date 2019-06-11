@@ -1,6 +1,6 @@
 {
   "name": "vscode-json-stable-stringify",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "displayName": "JSON Stable Sort",
   "description": "JSON object sort/document formatter using json-stable-stringify.",
   "license": "MIT",

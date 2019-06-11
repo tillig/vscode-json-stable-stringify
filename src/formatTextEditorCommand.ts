@@ -2,18 +2,30 @@ import * as vscode from 'vscode';
 import { StringifyResult } from './stringifyResult';
 import * as stringify from 'json-stable-stringify';
 
-export function formatTextEditorCommand(textEditor: vscode.TextEditor, edit: vscode.TextEditorEdit){
+export function formatTextEditorCommand(textEditor: vscode.TextEditor, edit: vscode.TextEditorEdit) {
+  const outputChannel = vscode.window.createOutputChannel('Sort JSON (Stable)')
+  try {
+    if (!sortAndReplace(textEditor, edit, outputChannel)) {
+      outputChannel.show(true);
+      vscode.window.showErrorMessage('Error during JSON sort. See output window for details.');
+    }
+  } finally {
+    outputChannel.dispose();
+  }
+}
+
+function sortAndReplace(textEditor: vscode.TextEditor, edit: vscode.TextEditorEdit, outputChannel: vscode.OutputChannel): boolean {
   let error: boolean = false;
-  if(textEditor.selections.length === 1 && textEditor.selections[0].isEmpty) {
+  if (textEditor.selections.length === 1 && textEditor.selections[0].isEmpty) {
     // There's no selection - do the whole doc.
     const text: string = textEditor.document.getText();
     if (text.length < 2) {
       // All JSON is at least two characters, even empty string/object. If it's a single-digit number,
       // there's arguably nothing to sort anyway.
-      return;
+      return true;
     }
 
-    const sorted: StringifyResult = sortJson(text, textEditor.options, new vscode.Position(1, 1));
+    const sorted: StringifyResult = sortJson(text, textEditor.options, new vscode.Position(1, 1), outputChannel);
     error = !sorted.success;
     if (sorted.success) {
       const lastLine: number = textEditor.document.lineCount - 1;
@@ -26,20 +38,20 @@ export function formatTextEditorCommand(textEditor: vscode.TextEditor, edit: vsc
   }
   else {
     // There are selections - iterate through each.
-    for(const selection of textEditor.selections) {
-      if(selection.isEmpty) {
+    for (const selection of textEditor.selections) {
+      if (selection.isEmpty) {
         // No text to transform.
         continue;
       }
 
       const text: string = textEditor.document.getText(selection);
-      if(text.length < 2) {
-      // All JSON is at least two characters, even empty string/object. If it's a single-digit number,
-      // there's arguably nothing to sort anyway.
+      if (text.length < 2) {
+        // All JSON is at least two characters, even empty string/object. If it's a single-digit number,
+        // there's arguably nothing to sort anyway.
         continue;
       }
 
-      const sorted: StringifyResult = sortJson(text, textEditor.options, selection.start);
+      const sorted: StringifyResult = sortJson(text, textEditor.options, selection.start, outputChannel);
       if (!sorted.success) {
         error = true;
         continue;
@@ -49,12 +61,10 @@ export function formatTextEditorCommand(textEditor: vscode.TextEditor, edit: vsc
     }
   }
 
-  if (error) {
-    vscode.window.showErrorMessage('Error during JSON sort. See JavaScript console for details (Help => Toggle Developer Tools).');
-  }
+  return !error;
 }
 
-function sortJson(original: string, editorOptions: vscode.TextEditorOptions, start: vscode.Position) : StringifyResult {
+function sortJson(original: string, editorOptions: vscode.TextEditorOptions, start: vscode.Position, outputChannel: vscode.OutputChannel): StringifyResult {
   const opts: stringify.Options = {
     space: editorOptions.insertSpaces ? editorOptions.tabSize : '\t',
   };
@@ -65,10 +75,15 @@ function sortJson(original: string, editorOptions: vscode.TextEditorOptions, sta
     sorted = stringify(JSON.parse(original), opts);
     success = true;
   } catch (e) {
-    console.error('Error doing stable stringify of JSON content at line ' + start.line + ', char ' + start.character + ':');
+    // Basic error message to output window.
+    const message = 'Error doing stable stringify of the JSON content which starts at line ' + start.line + ', char ' + start.character + '.'
+    outputChannel.appendLine(message);
+    outputChannel.appendLine(e.message);
+    outputChannel.appendLine('Sort errors usually are from malformed JSON - comments (not allowed), missing comma, extra comma, etc.');
+
+    // Details with stack trace to the JS console.
+    console.error(message);
     console.error(e);
-    console.error('Content:');
-    console.error(original);
   }
 
   return new StringifyResult(success, sorted);

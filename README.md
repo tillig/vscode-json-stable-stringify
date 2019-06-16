@@ -16,6 +16,10 @@ Some JSON sorters have too many options or try to do too much and can the result
 
 Finally, some JSON sorters are hard-tied to the JSON document type. This ignores JSON that might be embedded in a JavaScript file, or even JSON that appears in an HTML file as part of an embedded script. There's no language tie here - highlight something JSON and sort it. No judgment.
 
+## Comments Aren't Valid JSON
+
+Sadly, the JSON spec doesn't allow for comments and `json-stable-stringify`doesn't support them, either. If your JSON has comments, the sort from this plugin will fail. Sorry!
+
 ## Release Notes
 
 ### 1.0.0

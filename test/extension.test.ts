@@ -7,7 +7,7 @@ describe('Entry point', () => {
   context('ensures that', () => {
     let sandbox: sinon.SinonSandbox;
     const extensionContext = { } as any as vscode.ExtensionContext;
-    const subscriptions: Array<{ dispose(): any }> = [];
+    const subscriptions: { dispose(): any }[] = [];
 
     beforeEach(() => {
       sandbox = sinon.createSandbox();

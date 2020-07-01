@@ -16,9 +16,9 @@ Some JSON sorters have too many options or try to do too much and can the result
 
 Finally, some JSON sorters are hard-tied to the JSON document type. This ignores JSON that might be embedded in a JavaScript file, or even JSON that appears in an HTML file as part of an embedded script. There's no language tie here - highlight something JSON and sort it. No judgment.
 
-## Comments Aren't Valid JSON
+## You'll Lose Comments
 
-Sadly, the JSON spec doesn't allow for comments and `json-stable-stringify`doesn't support them, either. If your JSON has comments, the sort from this plugin will fail. Sorry!
+This extension can parse JSON with comments via the JSON5 parser, but **when writing the sorted JSON back out your comments will disappear** (as will other JSON extensions like trailing commas).
 
 ## Release Notes
 
@@ -29,3 +29,7 @@ Initial release.
 ### 1.1.0
 
 Errors during sort will get written to the "Tasks" output window.
+
+### 1.2.0
+
+Updated parser to JSON5 to allow sorting of JSON that has comments and other JSON extensions.

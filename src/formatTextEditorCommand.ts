@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { StringifyResult } from './stringifyResult';
-import * as stringify from 'json-stable-stringify';
+import stringify from 'json-stable-stringify';
+import JSON5 from 'json5';
 
 export function formatTextEditorCommand(textEditor: vscode.TextEditor, edit: vscode.TextEditorEdit) {
   const outputChannel = vscode.window.createOutputChannel('Sort JSON (Stable)')
@@ -72,7 +73,7 @@ function sortJson(original: string, editorOptions: vscode.TextEditorOptions, sta
   let sorted: string = '';
   let success: boolean = false;
   try {
-    sorted = stringify(JSON.parse(original), opts);
+    sorted = stringify(JSON5.parse(original), opts);
     success = true;
   } catch (e) {
     // Basic error message to output window.

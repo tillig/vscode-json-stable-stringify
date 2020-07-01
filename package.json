@@ -66,6 +66,8 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
-    "json-stable-stringify": "^1.0.1"
+    "@types/json5": "0.0.30",
+    "json-stable-stringify": "^1.0.1",
+    "json5": "^2.1.3"
   }
 }

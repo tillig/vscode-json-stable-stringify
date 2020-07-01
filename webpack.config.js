@@ -10,9 +10,8 @@ const config = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'extension.js',
     libraryTarget: 'commonjs2',
-    devtoolModuleFilenameTemplate: '../[resource-path]',
   },
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
   externals: {
     vscode: 'commonjs vscode',
   },

@@ -1,24 +1,25 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "noUnusedLocals": true,
-    "target": "es6",
-    "outDir": "out",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "lib": [
       "es6"
     ],
-    "sourceMap": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "outDir": "out",
     "rootDir": ".",
+    "sourceMap": true,
     "strict": true,
-    "esModuleInterop": true
+    "target": "es6"
   },
-  "include": [
-    "src/**/*.ts",
-    "test/**/*.ts"
-  ],
   "exclude": [
     "node_modules",
     ".vscode-test"
+  ],
+  "include": [
+    "src/**/*.ts",
+    "test/**/*.ts"
   ]
 }

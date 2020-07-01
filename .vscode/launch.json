@@ -1,33 +1,34 @@
 {
-  "version": "0.2.0",
-  "configurations": [{
-      "name": "Run Extension",
-      "type": "extensionHost",
-      "request": "launch",
-      "runtimeExecutable": "${execPath}",
+  "configurations": [
+    {
       "args": [
         "--disable-extensions",
         "--extensionDevelopmentPath=${workspaceFolder}"
       ],
+      "name": "Run Extension",
       "outFiles": [
         "${workspaceFolder}/dist/**/*.js"
       ],
-      "preLaunchTask": "npm: debug-package"
-    },
-    {
-      "name": "Run Extension Tests",
-      "type": "extensionHost",
+      "preLaunchTask": "npm: debug-package",
       "request": "launch",
       "runtimeExecutable": "${execPath}",
+      "type": "extensionHost"
+    },
+    {
       "args": [
         "--disable-extensions",
         "--extensionDevelopmentPath=${workspaceFolder}",
         "--extensionTestsPath=${workspaceFolder}/out/test/suite/index"
       ],
+      "name": "Run Extension Tests",
       "outFiles": [
         "${workspaceFolder}/out/test/**/*.js"
       ],
-      "preLaunchTask": "npm: compile"
+      "preLaunchTask": "npm: compile",
+      "request": "launch",
+      "runtimeExecutable": "${execPath}",
+      "type": "extensionHost"
     }
-  ]
+  ],
+  "version": "0.2.0"
 }

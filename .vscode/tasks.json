@@ -1,18 +1,18 @@
 {
-  "version": "2.0.0",
   "tasks": [
     {
-      "type": "npm",
-      "script": "watch",
-      "problemMatcher": "$tsc-watch",
+      "group": {
+        "isDefault": true,
+        "kind": "build"
+      },
       "isBackground": true,
       "presentation": {
         "reveal": "never"
       },
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      }
+      "problemMatcher": "$tsc-watch",
+      "script": "watch",
+      "type": "npm"
     }
-  ]
+  ],
+  "version": "2.0.0"
 }

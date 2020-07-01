@@ -1,6 +1,6 @@
 {
   "name": "vscode-json-stable-stringify",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "displayName": "JSON Stable Sort",
   "description": "JSON object sort/document formatter using json-stable-stringify.",
   "license": "MIT",
@@ -47,6 +47,7 @@
   },
   "devDependencies": {
     "@types/chai": "^4.2.11",
+    "@types/json5": "0.0.30",
     "@types/json-stable-stringify": "^1.0.32",
     "@types/mocha": "^7.0.2",
     "@types/node": "^13.9.1",
@@ -66,7 +67,6 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
-    "@types/json5": "0.0.30",
     "json-stable-stringify": "^1.0.1",
     "json5": "^2.1.3"
   }

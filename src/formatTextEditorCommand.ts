@@ -80,7 +80,7 @@ function sortJson(original: string, editorOptions: vscode.TextEditorOptions, sta
     const message = 'Error doing stable stringify of the JSON content which starts at line ' + start.line + ', char ' + start.character + '.'
     outputChannel.appendLine(message);
     outputChannel.appendLine(e.message);
-    outputChannel.appendLine('Sort errors usually are from malformed JSON - comments (not allowed), missing comma, extra comma, etc.');
+    outputChannel.appendLine('Sort errors usually are from malformed JSON - missing comma, extra comma, etc.');
 
     // Details with stack trace to the JS console.
     console.error(message);

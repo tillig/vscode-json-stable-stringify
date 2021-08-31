@@ -39,7 +39,7 @@
     "eslint-config-google": "^0.14.0",
     "glob": "^7.1.6",
     "mocha": "^8.0.1",
-    "tar": "^6.1.2",
+    "tar": "^6.1.9",
     "ts-loader": "^7.0.5",
     "typescript": "^3.9.5",
     "vscode-test": "^1.4.0",

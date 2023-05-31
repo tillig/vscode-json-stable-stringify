@@ -95,10 +95,17 @@ function sortJson(original: string, editorOptions: vscode.TextEditorOptions, sta
     sorted = stringify(JSON5.parse(original), opts);
     success = true;
   } catch (e) {
+    var error = "[unknown error]";
+    if (typeof e === "string") {
+      error = e;
+    } else if (e instanceof Error) {
+      error = e.message;
+    }
+
     // Basic error message to output window.
     const message = 'Error doing stable stringify of the JSON content which starts at line ' + start.line + ', char ' + start.character + '.';
     outputChannel.appendLine(message);
-    outputChannel.appendLine(e.message);
+    outputChannel.appendLine(error);
     outputChannel.appendLine('Sort errors usually are from malformed JSON - missing comma, extra comma, etc.');
 
     // Details with stack trace to the JS console.
@@ -108,4 +115,3 @@ function sortJson(original: string, editorOptions: vscode.TextEditorOptions, sta
 
   return new StringifyResult(success, sorted);
 }
-

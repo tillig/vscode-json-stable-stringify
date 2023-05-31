@@ -4,18 +4,19 @@
   },
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "google"
   ],
-  "overrides": [{
-    "files": [
-      "**/*.js"
-    ],
-    "rules": {
-      "@typescript-eslint/explicit-function-return-type": "off"
+  "overrides": [
+    {
+      "files": [
+        "**/*.js"
+      ],
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": "off"
+      }
     }
-  }],
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 6,

@@ -95,8 +95,8 @@ function sortJson(original: string, editorOptions: vscode.TextEditorOptions, sta
     sorted = stringify(JSON5.parse(original), opts);
     success = true;
   } catch (e) {
-    var error = "[unknown error]";
-    if (typeof e === "string") {
+    let error = '[unknown error]';
+    if (typeof e === 'string') {
       error = e;
     } else if (e instanceof Error) {
       error = e.message;

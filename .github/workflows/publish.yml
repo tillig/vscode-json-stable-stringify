@@ -1,0 +1,30 @@
+name: Publish
+
+on:
+  workflow_call:
+    secrets:
+      VSCE_PAT:
+        description: Token for publishing packages to Visual Studio Code Marketplace.
+        required: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Install Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22.x
+      - run: npm install -g npm
+      - run: npm clean-install
+      - name: Download package artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: packages
+          path: ./
+      - name: Publish
+        run: npm run deploy
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}

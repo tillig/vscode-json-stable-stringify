@@ -19,3 +19,7 @@ Finally, some JSON sorters are hard-tied to the JSON document type. This ignores
 ## You'll Lose Comments
 
 This extension can parse JSON with comments via the JSON5 parser, but **when writing the sorted JSON back out your comments will disappear** (as will other JSON extensions like trailing commas).
+
+## CLI and Pre-Commit Hook
+
+There's [an associated CLI tool and pre-commit hook](https://github.com/tillig/json-sort-cli) you can use to integrate sorting into your build.

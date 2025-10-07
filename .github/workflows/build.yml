@@ -16,7 +16,7 @@ jobs:
       - run: npm install -g npm
       - run: 'echo "Node: $(node -v)"'
       - run: 'echo "npm: $(npm -v)"'
-      - run: npm install --verbose
+      - run: npm install
       - run: npm run build
       - name: Upload package artifacts
         uses: actions/upload-artifact@v4

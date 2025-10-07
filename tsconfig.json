@@ -10,6 +10,7 @@
     "noUnusedLocals": true,
     "outDir": "out",
     "rootDir": ".",
+    "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
     "target": "es2022"

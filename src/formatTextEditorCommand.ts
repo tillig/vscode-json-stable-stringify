@@ -8,12 +8,17 @@ import JSON5 from 'json5';
  * @param {vscode.TextEditor} textEditor - The text editor instance with the document to format.
  * @param {vscode.TextEditorEdit} edit - Object for handling text editing transactions.
  */
-export function formatTextEditorCommand(textEditor: vscode.TextEditor, edit: vscode.TextEditorEdit): void {
+export function formatTextEditorCommand(
+  textEditor: vscode.TextEditor,
+  edit: vscode.TextEditorEdit
+): void {
   const outputChannel = vscode.window.createOutputChannel('Sort JSON (Stable)');
   try {
     if (!sortAndReplace(textEditor, edit, outputChannel)) {
       outputChannel.show(true);
-      vscode.window.showErrorMessage('Error during JSON sort. See output window for details.');
+      vscode.window.showErrorMessage(
+        'Error during JSON sort. See output window for details.'
+      );
     }
   } finally {
     outputChannel.dispose();
@@ -25,9 +30,13 @@ export function formatTextEditorCommand(textEditor: vscode.TextEditor, edit: vsc
  * @param {vscode.TextEditor} textEditor - The text editor instance with the document to format.
  * @param {vscode.TextEditorEdit} edit - Object for handling text editing transactions.
  * @param {vscode.OutputChannel} outputChannel - Output for errors and warnings.
- * @return {boolean} True if the operation succeeded; false if an error was shown.
+ * @returns {boolean} True if the operation succeeded; false if an error was shown.
  */
-function sortAndReplace(textEditor: vscode.TextEditor, edit: vscode.TextEditorEdit, outputChannel: vscode.OutputChannel): boolean {
+function sortAndReplace(
+  textEditor: vscode.TextEditor,
+  edit: vscode.TextEditorEdit,
+  outputChannel: vscode.OutputChannel
+): boolean {
   let error = false;
   if (textEditor.selections.length === 1 && textEditor.selections[0].isEmpty) {
     // There's no selection - do the whole doc.
@@ -38,14 +47,21 @@ function sortAndReplace(textEditor: vscode.TextEditor, edit: vscode.TextEditorEd
       return true;
     }
 
-    const sorted: StringifyResult = sortJson(text, textEditor.options, new vscode.Position(1, 1), outputChannel);
+    const sorted: StringifyResult = sortJson(
+      text,
+      textEditor.options,
+      new vscode.Position(1, 1),
+      outputChannel
+    );
     error = !sorted.success;
     if (sorted.success) {
       const lastLine: number = textEditor.document.lineCount - 1;
-      const textRange: vscode.Range = new vscode.Range(0,
+      const textRange: vscode.Range = new vscode.Range(
+        0,
         textEditor.document.lineAt(0).range.start.character,
         lastLine,
-        textEditor.document.lineAt(lastLine).range.end.character);
+        textEditor.document.lineAt(lastLine).range.end.character
+      );
       edit.replace(textRange, sorted.result);
     }
   } else {
@@ -63,7 +79,12 @@ function sortAndReplace(textEditor: vscode.TextEditor, edit: vscode.TextEditorEd
         continue;
       }
 
-      const sorted: StringifyResult = sortJson(text, textEditor.options, selection.start, outputChannel);
+      const sorted: StringifyResult = sortJson(
+        text,
+        textEditor.options,
+        selection.start,
+        outputChannel
+      );
       if (!sorted.success) {
         error = true;
         continue;
@@ -82,17 +103,22 @@ function sortAndReplace(textEditor: vscode.TextEditor, edit: vscode.TextEditorEd
  * @param {vscode.TextEditorOptions} editorOptions - The options for the editor, used for formatting information.
  * @param {vscode.Position} start - The position at which the JSON starts, used for reporting errors.
  * @param {vscode.OutputChannel} outputChannel - The output channel where errors should be written.
- * @return {StringifyResult} The result of the sorting operation.
+ * @returns {StringifyResult} The result of the sorting operation.
  */
-function sortJson(original: string, editorOptions: vscode.TextEditorOptions, start: vscode.Position, outputChannel: vscode.OutputChannel): StringifyResult {
-  const opts: stringify.Options = {
-    space: editorOptions.insertSpaces ? editorOptions.tabSize : '\t',
+function sortJson(
+  original: string,
+  editorOptions: vscode.TextEditorOptions,
+  start: vscode.Position,
+  outputChannel: vscode.OutputChannel
+): StringifyResult {
+  const opts: stringify.StableStringifyOptions = {
+    space: editorOptions.insertSpaces ? editorOptions.tabSize : '\t'
   };
 
   let sorted = '';
   let success = false;
   try {
-    sorted = stringify(JSON5.parse(original), opts);
+    sorted = stringify(JSON5.parse(original), opts) as string;
     success = true;
   } catch (e) {
     let error = '[unknown error]';
@@ -103,10 +129,17 @@ function sortJson(original: string, editorOptions: vscode.TextEditorOptions, sta
     }
 
     // Basic error message to output window.
-    const message = 'Error doing stable stringify of the JSON content which starts at line ' + start.line + ', char ' + start.character + '.';
+    const message =
+      'Error doing stable stringify of the JSON content which starts at line ' +
+      start.line +
+      ', char ' +
+      start.character +
+      '.';
     outputChannel.appendLine(message);
     outputChannel.appendLine(error);
-    outputChannel.appendLine('Sort errors usually are from malformed JSON - missing comma, extra comma, etc.');
+    outputChannel.appendLine(
+      'Sort errors usually are from malformed JSON - missing comma, extra comma, etc.'
+    );
 
     // Details with stack trace to the JS console.
     console.error(message);

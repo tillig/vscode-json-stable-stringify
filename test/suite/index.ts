@@ -4,12 +4,12 @@ import { default as Mocha } from 'mocha';
 
 /**
  * Runs the tests in the suite.
- * @return {Promise<void>} A promise to await completion.
+ * @returns {Promise<void>} A promise to await completion.
  */
 export async function run() {
   const runner = new Mocha({
     ui: 'tdd',
-    color: true,
+    color: true
   });
 
   const testsRoot = path.resolve(__dirname, '..');

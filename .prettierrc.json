@@ -1,0 +1,19 @@
+{
+  "endOfLine": "auto",
+  "overrides": [
+    {
+      "files": [
+        "*.yml",
+        "*.yaml"
+      ],
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ],
+  "printWidth": 80,
+  "quoteProps": "consistent",
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "none"
+}

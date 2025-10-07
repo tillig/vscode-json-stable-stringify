@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.4.0
+
+- Updated all dependencies to latest.
+- Updated minimum VS Code to 1.101.0.
+
 ## 1.3.0
 
 - Updated all dependencies to latest.

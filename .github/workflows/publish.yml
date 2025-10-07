@@ -18,6 +18,8 @@ jobs:
         with:
           node-version: 22.x
       - run: npm install -g npm
+      - run: 'echo "Node: $(node -v)"'
+      - run: 'echo "npm: $(npm -v)"'
       - run: npm install
       - name: Download package artifacts
         uses: actions/download-artifact@v4

@@ -14,7 +14,9 @@ jobs:
         with:
           node-version: 22.x
       - run: npm install -g npm
-      - run: npm install
+      - run: 'echo "Node: $(node -v)"'
+      - run: 'echo "npm: $(npm -v)"'
+      - run: npm install --verbose
       - run: npm run build
       - name: Upload package artifacts
         uses: actions/upload-artifact@v4

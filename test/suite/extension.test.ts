@@ -5,21 +5,31 @@ import * as vscode from 'vscode';
 suite('Extension test suite', () => {
   suiteSetup(async () => {
     vscode.window.showInformationMessage('Start all tests.');
-    await vscode.extensions.getExtension('TravisIllig.vscode-json-stable-stringify')?.activate();
+    await vscode.extensions
+      .getExtension('TravisIllig.vscode-json-stable-stringify')
+      ?.activate();
   });
 
   test('should be present', () => {
-    assert.ok(vscode.extensions.getExtension('TravisIllig.vscode-json-stable-stringify'));
+    assert.ok(
+      vscode.extensions.getExtension('TravisIllig.vscode-json-stable-stringify')
+    );
   });
 
   test('should activate', () => {
-    return vscode.extensions.getExtension('TravisIllig.vscode-json-stable-stringify')?.activate().then((_api: any) => {
-      assert.ok(true);
-    });
+    return vscode.extensions
+      .getExtension('TravisIllig.vscode-json-stable-stringify')
+      ?.activate()
+      .then(() => {
+        assert.ok(true);
+      });
   });
 
   test('command is registered', async () => {
     const commands = await vscode.commands.getCommands(true);
-    assert.notStrictEqual(-1, commands.indexOf('extension.vscode-json-stable-stringify.jsonStableSort'));
+    assert.notStrictEqual(
+      -1,
+      commands.indexOf('extension.vscode-json-stable-stringify.jsonStableSort')
+    );
   });
 });

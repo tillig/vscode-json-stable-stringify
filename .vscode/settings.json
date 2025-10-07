@@ -3,6 +3,11 @@
     "illig",
     "untrusted"
   ],
+  "eslint.useFlatConfig": true,
+  "eslint.validate": [
+    "javascript",
+    "typescript"
+  ],
   "files.exclude": {
     "out": false
   },

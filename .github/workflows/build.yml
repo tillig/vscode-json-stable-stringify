@@ -12,7 +12,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v5
         with:
-          node-version: 22.x
+          node-version: 22.22.1 # 22.x pinned to fix promise_retry package issue.
       - run: npm install -g npm
       - run: 'echo "Node: $(node -v)"'
       - run: 'echo "npm: $(npm -v)"'

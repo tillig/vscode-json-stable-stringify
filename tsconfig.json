@@ -1,20 +1,18 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "lib": [
       "es2022"
     ],
     "module": "node16",
     "moduleResolution": "node16",
-    "types": ["node", "mocha"],
+    "noEmit": true,
     "noUnusedLocals": true,
-    "outDir": "out",
-    "rootDir": ".",
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
-    "target": "es2022"
+    "target": "es2022",
+    "types": ["node", "mocha"]
   },
   "exclude": [
     "node_modules",

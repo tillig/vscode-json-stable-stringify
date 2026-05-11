@@ -1,10 +1,8 @@
 import * as assert from 'assert';
 import * as vscode from 'vscode';
-// import * as myExtension from '../../extension';
 
 suite('Extension test suite', () => {
   suiteSetup(async () => {
-    vscode.window.showInformationMessage('Start all tests.');
     await vscode.extensions
       .getExtension('TravisIllig.vscode-json-stable-stringify')
       ?.activate();

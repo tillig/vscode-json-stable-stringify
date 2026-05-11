@@ -1,5 +1,12 @@
 # Change Log
 
+## 1.5.0
+
+- Updated all dependencies to latest.
+- Switched bundler from webpack to esbuild for faster builds and smaller output.
+- Switched test runner to @vscode/test-cli.
+- Added web extension support (works in vscode.dev/github.dev).
+
 ## 1.4.0
 
 - Updated all dependencies to latest.

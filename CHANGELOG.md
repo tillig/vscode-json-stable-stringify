@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.5.0
+
+- Updated all dependencies to latest.
+
 ## 1.4.0
 
 - Updated all dependencies to latest.

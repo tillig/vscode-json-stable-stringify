@@ -26,7 +26,7 @@
   "description": "JSON object sort/document formatter using json-stable-stringify.",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@types/json-stable-stringify": "^1.1.0",
+    "@types/json-stable-stringify": "^1.2.0",
     "@types/mocha": "^10.0.1",
     "@types/node": "^25.9.1",
     "@types/vscode": "1.101.0",
